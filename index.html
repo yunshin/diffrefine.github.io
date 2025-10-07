@@ -1,49 +1,281 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>DiffRefine: Diffusion-based Proposal Specific Point Cloud Densification for Cross Domain Object Detection</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>DiffRefine: Diffusion-based Proposal Specific Point Cloud Densification</title>
+
+  <!-- Fonts & Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <style>
+    :root {
+      --text: #1f2937;
+      --muted: #6b7280;
+      --line: #e5e7eb;
+      --brand: #111827;
+      --chip: #f3f4f6;
+      --accent: #b23a48; /* subtle maroon accent */
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; padding: 0;
+      font-family: 'Inter', system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      color: var(--text);
+      background: #fff;
+      line-height: 1.6;
+    }
+    a { color: #1a73e8; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .wrap {
+      max-width: 1080px;
+      padding: 24px;
+      margin: 0 auto;
+    }
+    header { text-align: center; margin-bottom: 24px; }
+    header h1 { margin: 0 0 8px; font-size: clamp(1.6rem, 3vw, 2.2rem); }
+    .subtitle { color: var(--muted); margin: 0 0 10px; }
+    .authors { margin: 8px 0; font-size: 0.98rem; }
+    .authors a { color: var(--text); }
+    .affil { color: var(--muted); font-size: 0.95rem; }
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-top: 12px; }
+    .chip {
+      background: var(--chip);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 6px 12px; font-size: 0.9rem;
+    }
+
+    .hero-media { margin: 22px 0 10px; text-align: center; }
+    .hero-media img, .hero-media video, .hero-media iframe {
+      max-width: 100%; border-radius: 8px; border: 1px solid var(--line);
+    }
+    .caption { color: var(--muted); font-size: 0.9rem; margin-top: 6px; }
+
+    section { margin: 28px 0; }
+    h2 {
+      font-size: 1.35rem; margin: 0 0 12px; padding-bottom: 6px;
+      border-bottom: 1px solid var(--line);
+    }
+    .grid2 {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 18px;
+    }
+    .grid1 { display: grid; grid-template-columns: 1fr; gap: 16px; }
+    .card {
+      background: #fafafa; border: 1px solid var(--line); border-radius: 8px; padding: 16px;
+    }
+    figure { margin: 0; }
+    figure img { width: 100%; border-radius: 8px; border: 1px solid var(--line); }
+    .figcap { color: var(--muted); font-size: 0.9rem; margin-top: 6px; }
+
+    .links { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-top: 10px; }
+    .links a {
+      border: 1px solid var(--line); padding: 8px 12px; border-radius: 8px;
+      background: #fff; font-weight: 600;
+    }
+
+    .small { color: var(--muted); font-size: 0.95rem; }
+    .accent { color: var(--accent); font-weight: 600; }
+
+    footer { margin: 36px 0 12px; text-align: center; color: var(--muted); font-size: 0.9rem; }
+    @media (max-width: 860px) { .grid2 { grid-template-columns: 1fr; } }
+  </style>
 </head>
 <body>
-  <div class="container">
-    <h1>DiffRefine: Diffusion-based Proposal Specific Point Cloud Densification for Cross Domain Object Detection</h1>
-    <p class="authors">Sangyun Shin, Yuhang He, Xinyu Hou, Samuel Hodgson, Andrew Markham, Niki Trigoni C<br><em>ICCV 2025 (Highlight)</em></p>
+  <div class="wrap">
+    <header>
+      <h1>DiffRefine: Diffusion-based Proposal Specific Point Cloud Densification<br>for Cross-Domain Object Detection</h1>
+      <p class="authors">
+        <a href="#">Sangyun Shin</a><sup>1</sup>,
+        <a href="#">Yuhang He</a><sup>2</sup>,
+        <a href="#">Xinyu Hou</a><sup>1</sup>,
+        <a href="#">Samuel Hodgson</a><sup>1</sup>,
+        <a href="#">Andrew Markham</a><sup>1</sup>,
+        <a href="#">Niki Trigoni</a><sup>1</sup>
+      </p>
+      <p class="affil"><sup>1</sup>University of Oxford &nbsp;&nbsp; <sup>2</sup>Microsoft Research</p>
 
-    <div class="teaser">
-      <img src="media/teaser.png" alt="Teaser image" />
-    </div>
+      <div class="links">
+        <a href="https://www.microsoft.com/en-us/research/wp-content/uploads/2025/08/DiffRefine_ICCV.pdf" target="_blank"><i class="fa-solid fa-file-pdf"></i> Paper</a>
+        <a href="https://github.com/" target="_blank"><i class="fa-brands fa-github"></i> Code (coming)</a>
+        <a href="https://yunshin.github.io/DiffRefine/" target="_blank"><i class="fa-solid fa-link"></i> Project Page</a>
+        <a href="#" target="_blank"><i class="fa-brands fa-youtube"></i> Video</a>
+      </div>
 
-    <p><a href="https://arxiv.org/abs/xxxx.xxxxx">[Paper]</a>
-       <a href="https://github.com/yourname/yourproject">[Code]</a>
-       <a href="media/teaser.png">[Poster]</a>
-    </p>
+      <div class="chips">
+        <span class="chip">ICCV 2025 <span class="accent">(Spotlight)</span></span>
+        <span class="chip">Domain Adaptive 3D Detection</span>
+        <span class="chip">Diffusion</span>
+        <span class="chip">Point Clouds</span>
+      </div>
 
-    <h2>Abstract</h2>
-    <p>
-      The robustness of 3D object detection in large-scale outdoor point clouds degrades significantly when deployed in an unseen environment due to domain shifts. To minimize the domain gap, existing works on domain adaptive detection focuses on several factors, including point density, object shape and sizes, to reduce the false negative detections. However, the adaptation results indicate that there are still remaining challenges. We argue that this is due to the challenge in recognizing comparably less distinctive region on object surface due to sparsity, occlusion, \textit{etc.} In this work, we aim to reinforce those features by generating points on object surface to make them straightforwardly recognizable. We draw our motivation from a common observation that detection proposals already contain the accurate bounding boxes, but with relatively low objectness score predictions, which lead to false negatives. Given these box proposals, we densify sparse object points with a diffusion approach. As a result, our model \textit{DiffRefine} can act as a simple additional module before second-stage refinement, where most existing detection models for two-stage detection can use. Experimental results on domain adaptive detection show competitive performance, especially on vanishing points due to distance on various detection architectures. 
-    </p>
+      <!-- HERO: Figure 1 teaser -->
+      <div class="hero-media">
+        <!-- Replace src with your image for Figure 1 -->
+        <img src="assets/fig01_teaser.jpg" alt="Figure 1 teaser: proposal-specific generation boosts detection performance">
+        <div class="caption">Figure 1 (paper): DiffRefine performs proposal-specific generation to boost detection performance. <!-- Insert Figure 1 image --></div>
+      </div>
+    </header>
 
-    <h2>Method Overview</h2>
-    <img src="media/teaser.png" alt="Method diagram" class="full-width"/>
+    <section id="abstract">
+      <h2>Abstract</h2>
+      <p>
+        We propose <strong>DiffRefine</strong>, a diffusion-based module that densifies sparse object points inside box proposals to improve second-stage refinement in 3D object detection under domain shift. Motivated by the observation that proposals often have good localization but low objectness, DiffRefine iteratively generates points on object surfaces to reinforce missing features that lead to false negatives. Our approach uses differentiable 3D generation on voxel grids and conditions on spatial context to prevent hallucinations. Experiments on KITTI, nuScenes, and Waymo demonstrate competitive improvements, especially for distant objects where sparsity is severe.
+      </p>
+    </section>
 
-    <h2>Results</h2>
-    <img src="media/teaser.png" alt="Qualitative Results" class="full-width"/>
+    <section id="overview">
+      <h2>Method Overview</h2>
+      <div class="grid2">
+        <figure class="card">
+          <!-- Replace src with your image for Figure 2 -->
+          <img src="assets/fig02_pipeline.jpg" alt="Figure 2: Overall pipeline">
+          <figcaption class="figcap">
+            Figure 2 (paper): Overall pipeline—box proposals → point extraction &amp; size-agnostic voxelization → diffusion-based densification (with differentiable warping) → second-stage refinement. <!-- Insert Figure 2 image -->
+          </figcaption>
+        </figure>
+        <div class="card">
+          <h3 style="margin-top:0">Key Ideas</h3>
+          <ul>
+            <li><strong>Proposal-specific generation</strong>: operate only inside candidate boxes (object-centric) rather than the whole cloud.</li>
+            <li><strong>Diffusion for point densification</strong>: treat sparse surface points as noisy samples; denoise to recover dense structure.</li>
+            <li><strong>Size-agnostic voxelization</strong>: normalized box view to reduce object size variance across domains.</li>
+            <li><strong>Spatial-context conditioning</strong>: fuse neighborhood features to curb false positives during generation.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
 
-    <h2>BibTeX</h2>
-    <pre>
-@inproceedings{yourkey2025,
-  title={Your Project Title},
-  author={Author A and Author B and Author C},
-  booktitle={Conference Name},
-  year={2025}
+    <section id="generation">
+      <h2>Differentiable Object-Point Generation</h2>
+      <div class="grid2">
+        <figure class="card">
+          <!-- Replace src with your image for Figure 3 -->
+          <img src="assets/fig03_concept.jpg" alt="Figure 3: Concept of differentiable generation on voxel grids">
+          <figcaption class="figcap">
+            Figure 3 (paper): Conceptual diagram—(a) sparse input points, (b) generation target, (c) offset prediction, (d) generation via differentiable warping across diffusion steps. <!-- Insert Figure 3 image -->
+          </figcaption>
+        </figure>
+        <figure class="card">
+          <!-- Replace src with your image for Figure 4 -->
+          <img src="assets/fig04_steps.jpg" alt="Figure 4: Generated object points across denoising steps">
+          <figcaption class="figcap">
+            Figure 4 (paper): Generated object points across denoising steps (e.g., car and pedestrian classes). <!-- Insert Figure 4 image -->
+          </figcaption>
+        </figure>
+      </div>
+      <p class="small">
+        Implementation sketch: given proposal voxels, the diffusion model predicts offsets to the nearest occupied voxels and warps points progressively—providing a differentiable path for learning to densify object surfaces.
+      </p>
+    </section>
+
+    <section id="spatial-context">
+      <h2>Spatial Context &amp; Refinement</h2>
+      <div class="grid2">
+        <figure class="card">
+          <!-- Replace src with your image for Figure 6 -->
+          <img src="assets/fig06_context.jpg" alt="Figure 6: Impact of spatial context feature">
+          <figcaption class="figcap">
+            Figure 6 (paper): Spatial context feature reduces hallucinations by correlating generated points with neighborhood structure; improves refinement vs. no-context. <!-- Insert Figure 6 image -->
+          </figcaption>
+        </figure>
+        <div class="card">
+          <p>
+            We fuse a <strong>spatial context feature</strong> from a BEV encoder with generated object points using a cross-attention style correlation. This steers densification toward plausible geometry and helps the second-stage refinement reject false positives.
+          </p>
+          <ul class="small" style="margin-top:6px">
+            <li>Ablations show the largest performance drop when removing context.</li>
+            <li>Joint training of generation and refinement further boosts accuracy.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="results">
+      <h2>Results</h2>
+
+      <figure class="card">
+        <!-- Replace src with your image for Figure 5 -->
+        <img src="assets/fig05_qualitative.jpg" alt="Figure 5: Qualitative comparisons across baselines and ours">
+        <figcaption class="figcap">
+          Figure 5 (paper): Qualitative comparisons (e.g., Waymo → nuScenes, nuScenes → KITTI). DiffRefine reduces false negatives for distant, sparse objects. <!-- Insert Figure 5 image -->
+        </figcaption>
+      </figure>
+
+      <div class="grid2">
+        <figure class="card">
+          <!-- Replace src with your image for Figure 7 -->
+          <img src="assets/fig07_runtime_steps.jpg" alt="Figure 7: Runtime and denoising steps analysis">
+          <figcaption class="figcap">
+            Figure 7 (paper): Runtime vs. number of denoising steps; performance improves up to ~6 steps. <!-- Insert Figure 7 image -->
+          </figcaption>
+        </figure>
+        <figure class="card">
+          <!-- Replace src with your image for Figure 8 -->
+          <img src="assets/fig08_distance.jpg" alt="Figure 8: Distance vs. number of surface points and AP">
+          <figcaption class="figcap">
+            Figure 8 (paper): Object distance vs. surface points &amp; AP—DiffRefine helps particularly for distant objects suffering from sparsity. <!-- Insert Figure 8 image -->
+          </figcaption>
+        </figure>
+      </div>
+
+      <div class="grid1">
+        <figure class="card">
+          <!-- Optional: render tables as images if you exported them -->
+          <img src="assets/tab01_main_results.jpg" alt="Table 1: Quantitative results across adaptation scenarios">
+          <figcaption class="figcap">
+            Table 1 (paper): Quantitative results on domain adaptation (e.g., Waymo→KITTI, nuScenes→KITTI, Waymo→nuScenes) with SECOND-IoU and PointPillars.
+          </figcaption>
+        </figure>
+        <figure class="card">
+          <img src="assets/tab02_categories.jpg" alt="Table 2: Pedestrian and Cyclist categories">
+          <figcaption class="figcap">Table 2 (paper): Category-wise results (Pedestrian/Cyclist) on nuScenes→KITTI.</figcaption>
+        </figure>
+        <figure class="card">
+          <img src="assets/tab03_ablate.jpg" alt="Table 3: Ablation on spatial context and differentiability">
+          <figcaption class="figcap">Table 3 (paper): Ablations—spatial context (<em>f</em><sub>gen</sub>) and differentiable warping both matter.</figcaption>
+        </figure>
+        <figure class="card">
+          <img src="assets/tab04_generation.jpg" alt="Table 4: Generation methods and grid sizes">
+          <figcaption class="figcap">Table 4 (paper): Diffusion-based generation vs. voxel classification under different grid sizes.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section id="video">
+      <h2>Video</h2>
+      <div class="card" style="text-align:center">
+        <!-- If you have a YouTube video, replace VIDEO_ID below -->
+        <!-- <iframe width="100%" height="480" src="https://www.youtube.com/embed/VIDEO_ID" title="DiffRefine Video" frameborder="0" allowfullscreen></iframe> -->
+        <!-- Or use a local MP4 -->
+        <!-- <video controls src="assets/diffrefine_teaser.mp4" style="max-width:100%; border-radius:8px;"></video> -->
+        <p class="small">Insert your teaser/overview video here.</p>
+      </div>
+    </section>
+
+    <section id="bibtex">
+      <h2>BibTeX</h2>
+      <div class="card">
+<pre style="white-space:pre-wrap; margin:0; font-size:0.92rem;">
+@inproceedings{shin2025diffrefine,
+  title     = {DiffRefine: Diffusion-based Proposal Specific Point Cloud Densification for Cross-Domain Object Detection},
+  author    = {Shin, Sangyun and He, Yuhang and Hou, Xinyu and Hodgson, Samuel and Markham, Andrew and Trigoni, Niki},
+  booktitle = {Proceedings of the IEEE/CVF International Conference on Computer Vision (ICCV)},
+  year      = {2025}
 }
-    </pre>
+</pre>
+      </div>
+    </section>
 
     <footer>
-      <p>Contact: your.email@domain.com</p>
+      <div>© <span id="y"></span> DiffRefine Authors</div>
+      <div class="small">For questions: <a href="mailto:sangyun.shin@cs.ox.ac.uk">sangyun.shin@cs.ox.ac.uk</a></div>
     </footer>
   </div>
+
+  <script>
+    document.getElementById('y').textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
